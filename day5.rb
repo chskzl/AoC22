@@ -12,7 +12,8 @@ stacks = stacks.split("\n")
                .transpose
                .map {|s| s.select{|ch| ch >= 'A' && ch <= 'Z'}}
 
-stacks2 = Marshal.load(Marshal.dump(stacks))
+stacks2 = Array.new(stacks.length)
+stacks2.each_with_index {|_, i| stacks2[i] = stacks[i].dup}
 
 steps.each do |amount, from, to|
     stacks[to] = stacks[from].shift(amount).reverse.concat(stacks[to])
